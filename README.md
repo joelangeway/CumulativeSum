@@ -27,7 +27,9 @@ We can apply such a network to a larger array by computing in network sized chun
 It is important to note that doing more addition operations means more rounding errors, so numerical stability should be considered before applying these ideas.
 
 The program in cumsum.c has three functions in it for computing cumulative sums, corresponding to the three networks in the above graphs. It tests those functions for performance and stability with various sizes trying to minimize unfair advantages. It is pretty well commented. I compiled it like so:
+
     gcc -std=c99  -march=corei7 -O4 cumsum.c
+
 You may need to change the -march parameter to work on your machine. The program does require an x86 CPU with at least SSE3, but that should include most PCs and MACs these days. I used gcc 4.7.3 installed via macports. It took a little tinkering to make the compiler accept all the intrinsics that I tried, but mostly it was just getting the latest gcc, including the catch-all header, and telling the compiler to expect better than a 386.
 
 The results look approximately like this:
