@@ -1,0 +1,457 @@
+digraph CumlativeSums {
+	node [shape="rectange",fontsize=20]
+	graph_label [label="Data dependancy for Cumulative Sum algorithms", shape=rectange]
+	subgraph clusterScalar {
+		
+
+		s_label [label="Niave scalar"]
+		subgraph clusterInput {
+			color=white
+			s_a0 [label="a0"]
+			s_a1 [label="a1"]
+			s_a2 [label="a2"]
+			s_a3 [label="a3"]
+			s_a4 [label="a4"]
+			s_a5 [label="a5"]
+			s_a6 [label="a6"]
+			s_a7 [label="a7"]
+		}
+		s_label -> s_a3 [style=invis,constraint=true];
+		s_label -> s_a4 [style=invis,constraint=true];
+		subgraph clusterOutput {
+			color=white
+			s_s0 [label="s0"]
+			s_s1 [label="s1"]
+			s_s2 [label="s2"]
+			s_s3 [label="s3"]
+			s_s4 [label="s4"]
+			s_s5 [label="s5"]
+			s_s6 [label="s6"]
+			s_s7 [label="s7"]
+		}
+
+		node [label="+", shape="circle"]
+		s_plus1
+		s_plus2
+		s_plus3
+		s_plus4
+		s_plus5
+		s_plus6
+		s_plus7
+
+
+		s_a0	->	s_s0
+		s_a0	->	s_plus1
+		s_a1	->	s_plus1
+		s_plus1	->	s_s1
+		s_plus1	->	s_plus2
+		s_a2	->	s_plus2
+		s_plus2	->	s_s2
+		s_plus2	->	s_plus3
+		s_a3	->	s_plus3
+		s_plus3	->	s_s3
+		s_plus3	->	s_plus4
+		s_a4	->	s_plus4
+		s_plus4	->	s_s4
+		s_plus4	->	s_plus5
+		s_a5	->	s_plus5
+		s_plus5	->	s_s5
+		s_plus5	->	s_plus6
+		s_a6	->	s_plus6
+		s_plus6	->	s_s6
+		s_plus6	->	s_plus7
+		s_a7	->	s_plus7
+		s_plus7	->	s_s7
+
+	}
+	subgraph clusterSuperScalar1 {
+		node [shape="rectange"]
+		ss_label [label="Super scalar"]
+
+		subgraph clusterInput {
+			color=white
+			ss_a0 [label="a0"]
+			ss_a1 [label="a1"]
+			ss_a2 [label="a2"]
+			ss_a3 [label="a3"]
+			ss_a4 [label="a4"]
+			ss_a5 [label="a5"]
+			ss_a6 [label="a6"]
+			ss_a7 [label="a7"]
+		}
+		ss_label -> ss_a3 [style=invis,constraint=true];
+		ss_label -> ss_a4 [style=invis,constraint=true];
+		subgraph clusterOutput {
+			color=white
+			ss_s0 [label="s0"]
+			ss_s1 [label="s1"]
+			ss_s2 [label="s2"]
+			ss_s3 [label="s3"]
+			ss_s4 [label="s4"]
+			ss_s5 [label="s5"]
+			ss_s6 [label="s6"]
+			ss_s7 [label="s7"]
+		}
+
+		edge [style=invis,constraint=true]
+
+		ss_a0 -> ss_s0
+		ss_a1 -> ss_s1
+		ss_a2 -> ss_s2
+		ss_a3 -> ss_s3
+		ss_a4 -> ss_s4
+		ss_a5 -> ss_s5
+		ss_a6 -> ss_s6
+		ss_a7 -> ss_s7
+		ss_a0 -> ss_s1
+		ss_a1 -> ss_s2
+		ss_a2 -> ss_s3
+		ss_a3 -> ss_s4
+		ss_a4 -> ss_s5
+		ss_a5 -> ss_s6
+		ss_a6 -> ss_s7
+		ss_a1 -> ss_s0
+		ss_a2 -> ss_s1
+		ss_a3 -> ss_s2
+		ss_a4 -> ss_s3
+		ss_a5 -> ss_s4
+		ss_a6 -> ss_s5
+		ss_a7 -> ss_s6
+		
+		edge [style=solid,constraint=true]
+
+
+
+		node [ label="+", shape="circle"]
+		ss_plus1
+		ss_plus2
+		ss_plus3
+		ss_plus4
+		ss_plus5
+		ss_plus6
+		ss_plus7
+		ss_plus8
+		ss_plus9
+		ss_plus10
+		ss_plus11
+		ss_plus12
+
+		ss_a0	->	ss_s0
+		ss_a0	->	ss_plus1
+		ss_a1	->	ss_plus1
+		ss_plus1	->	ss_s1
+
+		ss_a2	->	ss_plus2
+		ss_a3	->	ss_plus2
+		ss_a4	->	ss_plus3
+		ss_a5	->	ss_plus3
+		ss_a6	->	ss_plus4
+		ss_a7	->	ss_plus4
+
+		ss_plus1	->	ss_plus5
+		ss_a2	-> ss_plus5
+		ss_plus1	-> ss_plus6
+		ss_plus2	->	ss_plus6
+		ss_plus3	->	ss_plus7
+		ss_plus4	-> ss_plus7
+		ss_plus3	-> ss_plus8
+		ss_a7	->	ss_plus8
+
+		ss_plus6	-> ss_plus9
+		ss_plus6	-> ss_plus10
+		ss_plus6	-> ss_plus11
+		ss_plus6	-> ss_plus12
+
+		ss_a4	->	ss_plus9
+		ss_plus3	->	ss_plus10
+		ss_plus7	->	ss_plus11
+		ss_plus8	->	ss_plus12
+
+		ss_plus5	-> ss_s2
+		ss_plus6	-> ss_s3
+		ss_plus9	-> ss_s4
+		ss_plus10	-> ss_s5
+		ss_plus11	-> ss_s6
+		ss_plus12	-> ss_s7
+
+	}
+
+	subgraph clusterSSE1 {
+		node [shape="rectange"]
+		sse_label [label="SIMD Super Scalar"]
+		subgraph clusterInput {
+			color=white
+			rankdir=LR
+			sse_a0 [label="a0"]
+			sse_a1 [label="a1"]
+			sse_a2 [label="a2"]
+			sse_a3 [label="a3"]
+			sse_a4 [label="a4"]
+			sse_a5 [label="a5"]
+			sse_a6 [label="a6"]
+			sse_a7 [label="a7"]
+			sse_a8 [label="a8"]
+			sse_a9 [label="a9"]
+			sse_a10 [label="a10"]
+			sse_a11 [label="a11"]
+			sse_a12 [label="a12"]
+			sse_a13 [label="a13"]
+			sse_a14 [label="a14"]
+			sse_a15 [label="a15"]
+		}
+		sse_label -> sse_a7 [style=invis,constraint=true];
+		sse_label -> sse_a8 [style=invis,constraint=true];
+
+		subgraph clusterOutput {
+			color=white
+			sse_s0 [label="s0"]
+			sse_s1 [label="s1"]
+			sse_s2 [label="s2"]
+			sse_s3 [label="s3"]
+			sse_s4 [label="s4"]
+			sse_s5 [label="s5"]
+			sse_s6 [label="s6"]
+			sse_s7 [label="s7"]
+			sse_s8 [label="s8"]
+			sse_s9 [label="s9"]
+			sse_s10 [label="s10"]
+			sse_s11 [label="s11"]
+			sse_s12 [label="s12"]
+			sse_s13 [label="s13"]
+			sse_s14 [label="s14"]
+			sse_s15 [label="s15"]
+		}		
+		subgraph clusterTemp {
+			color=white
+			sse_t0 [label="t0"]
+			sse_t1 [label="t1"]
+			sse_t2 [label="t2"]
+			sse_t3 [label="t3"]
+			sse_t4 [label="t4"]
+			sse_t5 [label="t5"]
+			sse_t6 [label="t6"]
+			sse_t7 [label="t7"]
+			sse_t8 [label="t8"]
+			sse_t9 [label="t9"]
+			sse_t10 [label="t10"]
+			sse_t11 [label="t11"]
+			sse_t12 [label="t12"]
+			sse_t13 [label="t13"]
+			sse_t14 [label="t14"]
+			sse_t15 [label="t15"]
+		}
+
+
+		node [ label="+", shape="circle"]
+		sse_plus1
+		sse_plus2
+		sse_plus3
+		sse_plus4
+		sse_plus5
+		sse_plus6
+		sse_plus7
+		sse_plus8
+		sse_plus9
+		sse_plus10
+		sse_plus11
+		sse_plus12
+		sse_pa2
+		sse_pa3
+		sse_pa4
+		sse_pa5
+		sse_pa6
+		sse_pa7
+		sse_pa8
+		sse_pa9
+		sse_pa10
+		sse_pa11
+		sse_pa12
+		sse_pa13
+		sse_pa14
+		sse_pa15
+		sse_pb1
+		sse_pb2
+		sse_pb3
+		sse_pb4
+		sse_pb5
+		sse_pb6
+		sse_pb7
+		sse_pb8
+		sse_pb9
+		sse_pb10
+		sse_pb11
+		sse_pb12
+		sse_pb13
+		sse_pb14
+		sse_pb15
+
+		edge [style=invis,constraint=true]
+
+		sse_a0 -> sse_t0
+		sse_a1 -> sse_t1
+		sse_a2 -> sse_t2
+		sse_a3 -> sse_t3
+		sse_a4 -> sse_t4
+		sse_a4 -> sse_t5
+		sse_a5 -> sse_t5
+		sse_a6 -> sse_t6
+		sse_a7 -> sse_t7
+		sse_a8 -> sse_t8
+		sse_a8 -> sse_t9
+		sse_a9 -> sse_t9
+		sse_a10 -> sse_t10
+		sse_a11 -> sse_t11
+		sse_a12 -> sse_t12
+		sse_a12 -> sse_t13
+		sse_a13 -> sse_t13
+		sse_a14 -> sse_t14
+		sse_a14 -> sse_t15
+		sse_a15 -> sse_t15
+
+		sse_t0 -> sse_s0
+		sse_t1 -> sse_s1
+		sse_t2 -> sse_s2
+		sse_t3 -> sse_s3
+		sse_t4 -> sse_s4
+		sse_t4 -> sse_s5
+		sse_t5 -> sse_s5
+		sse_t6 -> sse_s6
+		sse_t7 -> sse_s7
+		sse_t8 -> sse_s8
+		sse_t8 -> sse_s9
+		sse_t9 -> sse_s9
+		sse_t10 -> sse_s10
+		sse_t11 -> sse_s11
+		sse_t12 -> sse_s12
+		sse_t12 -> sse_s13
+		sse_t13 -> sse_s13
+		sse_t14 -> sse_s14
+		sse_t14 -> sse_s15
+		sse_t15 -> sse_s15
+		
+		edge [style=solid,constraint=true]
+
+
+		sse_a0	->	sse_t0
+		sse_a1	->	sse_t1
+		sse_a2	->	sse_t2
+		sse_a3	->	sse_t3
+		sse_a0	->	sse_plus1
+		sse_a1	->	sse_plus2
+		sse_a2	->	sse_plus3
+		sse_a3	->	sse_plus4
+		sse_a4	->	sse_plus1
+		sse_a5	->	sse_plus2
+		sse_a6	->	sse_plus3
+		sse_a7	->	sse_plus4
+		sse_plus1	->	sse_plus5
+		sse_plus2	->	sse_plus6
+		sse_plus3	->	sse_plus7
+		sse_plus4	->	sse_plus8
+		sse_plus1	->	sse_t4
+		sse_plus2	->	sse_t5
+		sse_plus3	->	sse_t6
+		sse_plus4	->	sse_t7
+		sse_a8	-> sse_plus5
+		sse_a9	-> sse_plus6
+		sse_a10	-> sse_plus7
+		sse_a11	-> sse_plus8
+		sse_plus5	->	sse_plus9
+		sse_plus6	->	sse_plus10
+		sse_plus7	->	sse_plus11
+		sse_plus8	->	sse_plus12
+		sse_plus5	->	sse_t8
+		sse_plus6	->	sse_t9
+		sse_plus7	->	sse_t10
+		sse_plus8	->	sse_t11
+		sse_a12	-> sse_plus9
+		sse_a13	-> sse_plus10
+		sse_a14	-> sse_plus11
+		sse_a15	-> sse_plus12
+		sse_plus9	->	sse_t12
+		sse_plus10	->	sse_t13
+		sse_plus11	->	sse_t14
+		sse_plus12	->	sse_t15
+		
+		sse_t0 -> sse_pa2
+		sse_t1 -> sse_pa3
+		sse_t2 -> sse_pa4
+		sse_t3 -> sse_pa5
+		sse_t4 -> sse_pa6
+		sse_t5 -> sse_pa7
+		sse_t6 -> sse_pa8
+		sse_t7 -> sse_pa9
+		sse_t8 -> sse_pa10
+		sse_t9 -> sse_pa11
+		sse_t10 -> sse_pa12
+		sse_t11 -> sse_pa13
+		sse_t12 -> sse_pa14
+		sse_t13 -> sse_pa15
+		sse_t2 -> sse_pa2
+		sse_t3 -> sse_pa3
+		sse_t4 -> sse_pa4
+		sse_t5 -> sse_pa5
+		sse_t6 -> sse_pa6
+		sse_t7 -> sse_pa7
+		sse_t8 -> sse_pa8
+		sse_t9 -> sse_pa9
+		sse_t10 -> sse_pa10
+		sse_t11	-> sse_pa11
+		sse_t12 -> sse_pa12
+		sse_t13 -> sse_pa13
+		sse_t14 -> sse_pa14
+		sse_t15 -> sse_pa15
+		
+		sse_t0 -> sse_pb1
+		sse_t1 -> sse_pb2
+		sse_pa2 -> sse_pb3
+		sse_pa3 -> sse_pb4
+		sse_pa4 -> sse_pb5
+		sse_pa5 -> sse_pb6
+		sse_pa6 -> sse_pb7
+		sse_pa7 -> sse_pb8
+		sse_pa8 -> sse_pb9
+		sse_pa9 -> sse_pb10
+		sse_pa10 -> sse_pb11
+		sse_pa11 -> sse_pb12
+		sse_pa12 -> sse_pb13
+		sse_pa13 -> sse_pb14
+		sse_pa14 -> sse_pb15
+		sse_t1 -> sse_pb1
+		sse_pa2 -> sse_pb2
+		sse_pa3 -> sse_pb3
+		sse_pa4 -> sse_pb4
+		sse_pa5 -> sse_pb5
+		sse_pa6 -> sse_pb6
+		sse_pa7 -> sse_pb7
+		sse_pa8 -> sse_pb8
+		sse_pa9 -> sse_pb9
+		sse_pa10 -> sse_pb10
+		sse_pa11 -> sse_pb11
+		sse_pa12 -> sse_pb12
+		sse_pa13 -> sse_pb13
+		sse_pa14 -> sse_pb14
+		sse_pa15 -> sse_pb15
+
+		sse_t0 -> sse_s0
+		sse_pb1 -> sse_s1
+		sse_pb2 -> sse_s2
+		sse_pb3 -> sse_s3
+		sse_pb4 -> sse_s4
+		sse_pb5 -> sse_s5
+		sse_pb6 -> sse_s6
+		sse_pb7 -> sse_s7
+		sse_pb8 -> sse_s8
+		sse_pb9 -> sse_s9
+		sse_pb10 -> sse_s10
+		sse_pb11 -> sse_s11
+		sse_pb12 -> sse_s12
+		sse_pb13 -> sse_s13
+		sse_pb14 -> sse_s14
+		sse_pb15 -> sse_s15
+
+	}
+	graph_label -> s_label [style=invis,constraint=true];
+	graph_label -> ss_label [style=invis,constraint=true];
+	graph_label -> sse_label [style=invis,constraint=true];
+}
