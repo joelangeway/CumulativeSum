@@ -22,7 +22,7 @@ If we only needed the total sum, it would be obvious that we can divide that up 
 
 (The graph was created with graphvis/dot. I know it's not super neat, but it's better than if I had drawn a bunch of boxes and arrows myself.)
 
-We can apply such a network to a larger array by computing a network sized chunks, adding the previous grand total to the first element of the next chunk before advancing.
+We can apply such a network to a larger array by computing in network sized chunks, adding the previous grand total to the first element of the next chunk before advancing.
 
 It is important to note that doing more addition operations means more rounding errors, so numerical stability should be considered before applying these ideas.
 
