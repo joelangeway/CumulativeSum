@@ -1,7 +1,7 @@
-How to compute a cumulative sum faster.
+How to Speed Up a CumUlative Sum
 =======================================
 
-I've more than a few times written a program that I wished ran faster and after running it through a profiler found that in spent a large proportion of its time computing a cumulative sum. Most often this is part of a function that samples values from a multinomial distribution like so:
+I've more than a few times written a program that I wished ran faster and after running it through a profiler found that it spent a large proportion of its time computing a cumulative sum. Most often this is part of a function that samples values from a multinomial distribution like so:
 
     int sample_multinomial(float *ps, int n)
     {
